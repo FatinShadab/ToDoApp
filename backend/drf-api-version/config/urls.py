@@ -22,16 +22,15 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')), 
     #|_ localhost:port/api-auth/login/ 
     #|_ localhost:port/api-auth/logout/
-    path('client-user/', include('user.urls')),
-    #|_ localhost:port/client-user/create/
-    #|_ localhost:port/client-user/all/
-    #|_ localhost:port/client-user/get/<int:id>/
-    #|_ localhost:port/client-user/update/
-    #|_ localhost:port/client-user/delete/
-    path('api-v1/', include('api.urls')),
-    #|_ localhost:port/api-v1/create/
-    #|_ localhoost:port/api-v1/all/
-    #|_ localhoost:port/api-v1/get/<int:id>/
-    #|_ localhoost:port/api-v1/update/<int:id>/
-    #|_ localhost:port/api-v1/delete/<int:id>/
+    path('client-user-v0/', include('user.urls')),
+    #|_ localhost:port/client-user-v0/create/
+    #|_ localhost:port/client-user-v0/update/
+    #|_ localhost:port/client-user-v0/delete/
+#####path('client-user-v1/', include('user_v1.urls')),
+#####path('api-v0/', include('api.urls')),
+    #|_ localhost:port/api-v0/create/
+    #|_ localhoost:port/api-v0/all/
+    #|_ localhoost:port/api-v0/get/<int:id>/
+    #|_ localhoost:port/api-v0/update/<int:id>/
+    #|_ localhost:port/api-v0/delete/<int:id>/
 ]
