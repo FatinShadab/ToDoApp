@@ -28,7 +28,9 @@ class CreateUserView(
 
 
 class RetriveUserView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+
+    #authentication_classes = [authentication.SessionAuthentication, authentication.BasicAuthentication]
+    #permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         return Response({"username": f"{self.request.user.get_username()}", "email": f"{self.request.user.email}"})
@@ -39,7 +41,8 @@ class UpdateUserView(
                         generics.GenericAPIView
                     ):
 
-    permission_classes = [permissions.IsAuthenticated]
+    #authentication_classes = [authentication.SessionAuthentication, authentication.BasicAuthentication]
+    #permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserSerializer
 
     def put(self, request, *args, **kwargs):
@@ -50,10 +53,12 @@ class UpdateUserView(
 
 
 class DeleteUserView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+
+    #authentication_classes = [authentication.SessionAuthentication, authentication.BasicAuthentication]
+    #permission_classes = [permissions.IsAuthenticated]
 
     def delete(self, request, *args, **kwargs):
         user = self.request.user
         user.delete()
 
-        return Response({"result":"user delete"})
+        return Response({"result":"user deleted"})
