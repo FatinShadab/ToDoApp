@@ -27,6 +27,13 @@ class CreateUserView(
         })
 
 
+class RetriveUserView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        return Response({"username": f"{self.request.user.get_username()}", "email": f"{self.request.user.email}"})
+
+
 class UpdateUserView(
                         mixins.CreateModelMixin, 
                         generics.GenericAPIView

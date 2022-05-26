@@ -24,6 +24,7 @@ urlpatterns = [
     #|_ localhost:port/api-auth/logout/
     path('client-user-v0/', include('user.urls')),
     #|_ localhost:port/client-user-v0/create/
+    #|_ localhost:port/client-user-v0/get_info/
     #|_ localhost:port/client-user-v0/update/
     #|_ localhost:port/client-user-v0/delete/
 #####path('client-user-v1/', include('user_v1.urls')),

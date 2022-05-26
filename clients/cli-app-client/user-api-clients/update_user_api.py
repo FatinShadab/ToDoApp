@@ -5,18 +5,18 @@ from requests.auth import HTTPBasicAuth
 
 endpoint = "http://127.0.0.1:8080/client-user-v0/update/"
 
-username = input("Enter your username : ")
-password = getpass("Enter your password : ")
+auth_username = input("Enter your username : ")
+auth_password = getpass("Enter your password : ")
 
-username = input("Enter your username: ")
-email = input("Enter your email address: ")
-password1 = getpass("Enter your password: ")
-password2 = getpass("Re-type your password: ")
+username = input("[for update] Enter your username: ")
+email = input("[for update] Enter your email address: ")
+password1 = getpass("[for update] Enter your password: ")
+password2 = getpass("[for update] Re-type your password: ")
 
 while (password1 != password2):
     print("password didn't match enter again!")
-    password1 = getpass("Enter your password: ")
-    password2 = getpass("Re-type your password: ")
+    password1 = getpass("[for update] Enter your password: ")
+    password2 = getpass("[for update] Re-type your password: ")
 
 data = {
     'username': username,
@@ -24,7 +24,7 @@ data = {
     'password': password2,
 }
 
-response = requests.put(endpoint, data=data, auth=HTTPBasicAuth(username, password))
+response = requests.put(endpoint, data=data, auth=HTTPBasicAuth(auth_username, auth_password))
 
 print(f"response status: {response.status_code}")
 print(response.json())
