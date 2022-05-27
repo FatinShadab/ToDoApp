@@ -1,0 +1,11 @@
+from rest_framework import serializers
+from todo.models import Todo
+
+class TodoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = ('user', 'title', 'description')
+
+    def create(self, validated_data):
+        todo = Todo.objects.create(**validated_data)
+        return todo

@@ -27,11 +27,11 @@ urlpatterns = [
     #|_ localhost:port/client-user-v0/get_info/
     #|_ localhost:port/client-user-v0/update/
     #|_ localhost:port/client-user-v0/delete/
-#####path('client-user-v1/', include('user_v1.urls')),
-#####path('api-v0/', include('api.urls')),
+    path('api-v0/', include('api.urls')),
     #|_ localhost:port/api-v0/create/
     #|_ localhoost:port/api-v0/all/
     #|_ localhoost:port/api-v0/get/<int:id>/
     #|_ localhoost:port/api-v0/update/<int:id>/
     #|_ localhost:port/api-v0/delete/<int:id>/
+#####path('client-user-v1/', include('user_v1.urls')),
 ]
