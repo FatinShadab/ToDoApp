@@ -1,10 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import mixins, generics, authentication, permissions
-
+from django.http import Http404
+from todo.models import Todo
 from .serializers import TodoSerializer
 
-# Create your views here.
 
 class CreateTodoEP(
                         mixins.CreateModelMixin,
@@ -27,3 +27,20 @@ class CreateTodoEP(
         return Response({
             "todo": TodoSerializer(todo, context=self.get_serializer_context()).data,
         })
+
+
+class DeleteTodoEP(APIView):
+
+    #authentication_classes = [authentication.SessionAuthentication, authentication.BasicAuthentication]
+    #permission_classes = [permissions.IsAuthenticated]
+
+    def delete(self, request, *args, **kwargs):
+        user = self.request.user
+
+        try:
+            todo = Todo.objects.get(user=user.pk, title=request.data['title'])
+        except Todo.DoesNotExist:
+            raise Http404("Given query not found....")
+
+        todo.delete()
+        return Response({"result":"todo deleted"})
