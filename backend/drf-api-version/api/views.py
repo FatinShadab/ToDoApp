@@ -29,6 +29,21 @@ class CreateTodoEP(
         })
 
 
+class GetAllTodoEP(generics.ListCreateAPIView):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+
+    def get_queryset(self):
+        todos = Todo.objects.all().filter(user=self.request.user.pk)
+        return todos
+
+    def list(self, request):
+        # Note the use of `get_queryset()` instead of `self.queryset`
+        queryset = self.get_queryset()
+        serializer = TodoSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
 class DeleteTodoEP(APIView):
 
     #authentication_classes = [authentication.SessionAuthentication, authentication.BasicAuthentication]
