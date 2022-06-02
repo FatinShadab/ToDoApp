@@ -44,6 +44,24 @@ class GetAllTodoEP(generics.ListCreateAPIView):
         return Response(serializer.data)
 
 
+class GetOneTodoEP(generics.ListCreateAPIView):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+
+    def get_queryset(self):
+        try:
+            todo = Todo.objects.get(user=self.request.user.pk, title=self.request.data['title'])
+        except Todo.DoesNotExist:
+            raise Http404("Given query not found....")
+        return todo
+
+    def list(self, request):
+        # Note the use of `get_queryset()` instead of `self.queryset`
+        queryset = self.get_queryset()
+        serializer = TodoSerializer(queryset, many=False)
+        return Response(serializer.data)
+
+
 class DeleteTodoEP(APIView):
 
     #authentication_classes = [authentication.SessionAuthentication, authentication.BasicAuthentication]
